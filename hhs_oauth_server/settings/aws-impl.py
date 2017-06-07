@@ -27,6 +27,8 @@ ALLOWED_HOSTS = env('DJANGO_ALLOWED_HOSTS', ['*',
 # Warning: on macOS hostname is case sensitive
 
 # removing security enforcement in development mode
+# set to FALSE to mirror PROD
+# DEBUG = True
 DEBUG = False
 if DEBUG:
     print("WARNING: Set DJANGO_DEBUG environment variable to False "
@@ -52,9 +54,9 @@ AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY',
 AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME', 'change-me')
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 
-STATICFILES_LOCATION = 'static'
+STATICFILES_LOCATION = '/static/'
 STATICFILES_STORAGE = 'hhs_oauth_server.s3_storage.StaticStorage'
-STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
+STATIC_URL = "https://%s%s" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
 # STATIC_URL = '/static/'
 
 MEDIAFILES_LOCATION = 'media'
